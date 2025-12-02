@@ -1,33 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="32dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#f0f5f9"
+    android:padding="32dp">
 
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⚓ Registro"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#023e8a"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Nombre -->
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"/>
+        android:layout_height="55dp"
+        android:hint="Nombre completo"
+        android:background="@drawable/input_style"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#555"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPersonName" />
 
+    <!-- Correo -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Correo electrónico"/>
+        android:layout_height="55dp"
+        android:hint="Correo electrónico"
+        android:background="@drawable/input_style"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#555"
+        android:layout_marginBottom="16dp"
+        android:inputType="textEmailAddress" />
 
+    <!-- Contraseña -->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="Contraseña"
-        android:inputType="textPassword"/>
+        android:background="@drawable/input_style"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#555"
+        android:layout_marginBottom="24dp"
+        android:inputType="textPassword" />
 
+    <!-- Botón Registrar -->
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrar"/>
+        android:layout_height="50dp"
+        android:text="Registrar"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:background="@drawable/btn_primary"
+        android:textColor="#fff"
+        android:layout_marginBottom="12dp" />
+
+
 </LinearLayout>

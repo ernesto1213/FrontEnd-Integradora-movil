@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 🔹 Texto de mensajes (por ejemplo: "Cargando...", "Error", etc.) -->
+        <TextView
+            android:id="@+id/txtMensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cargando exámenes..."
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:gravity="center_horizontal" />
+
+        <!-- 🔹 Contenedor dinámico donde se insertan las tarjetas de exámenes -->
+        <LinearLayout
+            android:id="@+id/listaExamenes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+</ScrollView>
+

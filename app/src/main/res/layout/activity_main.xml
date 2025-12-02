@@ -1,22 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="32dp"
-    android:gravity="center">
+    android:fillViewport="true"
+    android:background="#FFFCFC">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/btnLogout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cerrar sesión"/>
+        android:orientation="vertical"
+        android:padding="24dp">
 
-</LinearLayout>
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvSaludo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mantenimiento Naval"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#0D47A1"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Panel principal"
+                android:textSize="16sp"
+                android:textColor="#455A64"
+                android:paddingTop="4dp" />
+        </LinearLayout>
+
+        <!-- GRID MODERNO -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:alignmentMode="alignMargins"
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true"
+            android:paddingTop="10dp">
+
+            <!-- TARJETA COMPONENTE (REUTILIZABLE) -->
+            <!-- CURSOS -->
+            <LinearLayout
+                android:id="@+id/btnCursos"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_info_details"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Cursos"/>
+            </LinearLayout>
+
+            <!-- SIMULADOR -->
+            <LinearLayout
+                android:id="@+id/btnSimulador"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_compass"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Simulador"/>
+            </LinearLayout>
+
+            <!-- EVALUACIONES -->
+            <LinearLayout
+                android:id="@+id/btnEvaluaciones"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_edit"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Evaluaciones"/>
+            </LinearLayout>
+
+            <!-- CERTIFICADOS -->
+            <LinearLayout
+                android:id="@+id/btnCertificados"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_agenda"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Certificados"/>
+            </LinearLayout>
+
+            <!-- CREAR EXÁMENES -->
+            <LinearLayout
+                android:id="@+id/btnCrearExamenes"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_manage"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Crear Exámenes"/>
+            </LinearLayout>
+
+            <!-- GESTIÓN DE USUARIOS -->
+            <LinearLayout
+                android:id="@+id/btnGestionUsuarios"
+                style="@style/DashboardCard">
+
+                <ImageView
+                    style="@style/DashboardIcon"
+                    android:src="@android:drawable/ic_menu_myplaces"/>
+
+                <TextView
+                    style="@style/DashboardText"
+                    android:text="Gestión de Usuarios"/>
+            </LinearLayout>
+
+        </GridLayout>
+
+        <!-- BOTÓN LOGOUT -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar sesión"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#2F48D3"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

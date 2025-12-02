@@ -1,4 +1,5 @@
 package com.example.frontendintegradora;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etName, etEmail, etPassword;
@@ -35,54 +35,57 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(v -> {
-        String name = etName.getText().toString();
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
 
-        JSONObject registerData = new JSONObject();
-        try {
-            registerData.put("name", name);
-            registerData.put("email", email);
-            registerData.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            JSONObject registerData = new JSONObject();
+            try {
+                registerData.put("name", name);
+                registerData.put("email", email);
+                registerData.put("password", password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        new RegisterTask().execute(registerData.toString());
-    });
+            new RegisterTask().execute(registerData.toString());
+        });
     }
 
     private class RegisterTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-        String jsonInput = params[0];
-        try {
-            URL url = new URL("http://10.0.2.2:8080/api/login/register"); // usar 10.0.2.2 en emulador
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setDoOutput(true);
+            String jsonInput = params[0];
+            try {
+                // 🔥 URL DE PRODUCCIÓN EN RENDER
+                URL url = new URL("https://nuevo-production-e70c.up.railway.app/api/login/register");
 
-            OutputStream os = conn.getOutputStream();
-            os.write(jsonInput.getBytes("UTF-8"));
-            os.close();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                conn.setDoOutput(true);
 
-            InputStream is = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
+                OutputStream os = conn.getOutputStream();
+                os.write(jsonInput.getBytes("UTF-8"));
+                os.close();
+
+                InputStream is = conn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                reader.close();
+                return sb.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
-            reader.close();
-            return sb.toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
         }
-    }
 
         @Override
         protected void onPostExecute(String result) {

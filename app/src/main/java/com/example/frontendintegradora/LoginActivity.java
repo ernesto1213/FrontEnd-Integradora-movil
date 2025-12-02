@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,6 +21,22 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin, btnGoRegister;
 
+    // 🔥 PRODUCCIÓN
+    private static final String BASE_URL_PROD = "https://nuevo-production-e70c.up.railway.app";
+
+    // 🔥 LOCAL PARA EMULADOR
+    private static final String BASE_URL_LOCAL = "http://10.0.2.2:8080";
+
+    // 🔥 Auto–switch (si es emulador usa local, si es teléfono usa Render)
+    private static String getBaseUrl() {
+        return android.os.Build.FINGERPRINT.contains("generic")
+                ? BASE_URL_LOCAL
+                : BASE_URL_PROD;
+    }
+
+    // ENDPOINT LOGIN
+    private static final String LOGIN_URL = getBaseUrl() + "/api/login/login";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnGoRegister = findViewById(R.id.btnGoRegister);
 
-        // Botón Iniciar Sesión
         btnLogin.setOnClickListener(v -> {
-            String email = etEmail.getText().toString();
-            String password = etPassword.getText().toString();
+            String email = etEmail.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             JSONObject loginData = new JSONObject();
             try {
@@ -50,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
             new LoginTask().execute(loginData.toString());
         });
 
-        // Botón Registrarse
         btnGoRegister.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
@@ -62,15 +78,15 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String jsonInput = params[0];
             try {
-                URL url = new URL("http://10.0.2.2:8080/api/login/login"); // 10.0.2.2 para emulador
+                URL url = new URL(LOGIN_URL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 conn.setDoOutput(true);
 
-                OutputStream os = conn.getOutputStream();
-                os.write(jsonInput.getBytes("UTF-8"));
-                os.close();
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(jsonInput.getBytes("UTF-8"));
+                }
 
                 InputStream is = conn.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -95,14 +111,26 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject data = new JSONObject(result);
                     if (data.getString("status").equals("ok")) {
                         Toast.makeText(LoginActivity.this, "✅ Login exitoso", Toast.LENGTH_SHORT).show();
+
                         String token = data.getString("token");
-                        getSharedPreferences("prefs", MODE_PRIVATE).edit().putString("token", token).apply();
+                        int userId = data.optInt("id", -1);
+                        String rango = data.getString("rango");
+
+                        // 🔥 Guardamos token + ID en APP_PREFS
+                        getSharedPreferences("APP_PREFS", MODE_PRIVATE)
+                                .edit()
+                                .putString("token", token)
+                                .putInt("userId", userId)
+                                .putString("rango", rango)
+                                .apply();
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
+
                     } else {
-                        Toast.makeText(LoginActivity.this, "❌ " + data.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "❌ " + data.optString("message", "Error desconocido"), Toast.LENGTH_SHORT).show();
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(LoginActivity.this, "❌ Error parseando respuesta", Toast.LENGTH_SHORT).show();

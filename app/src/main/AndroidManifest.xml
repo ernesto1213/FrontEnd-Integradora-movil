@@ -27,6 +27,16 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
 
+        <activity android:name=".CursosActivity" />
+        <activity android:name=".EvaluacionesActivity" />
+        <activity android:name=".CertificadosActivity" />
+        <activity android:name=".SimuladorActivity" />
+        <activity android:name=".CrearExamenesActivity" />
+        <activity android:name=".GestionUsuariosActivity" />
+
+        <activity android:name=".CursoDetalleActivity" />
+        <activity android:name=".ExamenDetalleActivity" />
+
     </application>
 
 </manifest>

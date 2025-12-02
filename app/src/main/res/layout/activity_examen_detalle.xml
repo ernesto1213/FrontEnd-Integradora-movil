@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:background="#ECEFF1">
+
+    <LinearLayout
+        android:id="@+id/contenedorPreguntas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- TÍTULO PRINCIPAL -->
+        <TextView
+            android:id="@+id/txtTituloExamen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contestar Examen"
+            android:textStyle="bold"
+            android:textColor="#1A237E"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:padding="8dp" />
+
+        <!-- TARJETA DE MENSAJE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:elevation="4dp"
+            android:background="@drawable/card_background"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:id="@+id/txtMensaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cargando preguntas..."
+                android:textColor="#263238"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- CONTENEDOR DE PREGUNTAS -->
+        <LinearLayout
+            android:id="@+id/preguntasLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- BOTÓN DE ENVÍO -->
+        <Button
+            android:id="@+id/btnEnviarExamen"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Enviar Examen"
+            android:layout_marginTop="24dp"
+            android:textSize="18sp"
+            android:backgroundTint="#1976D2"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:elevation="4dp" />
+
+        <!-- RESULTADO -->
+        <TextView
+            android:id="@+id/txtResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#004D40"
+        android:textSize="20sp"
+        android:layout_marginTop="28dp" />
+    </LinearLayout>
+</ScrollView>

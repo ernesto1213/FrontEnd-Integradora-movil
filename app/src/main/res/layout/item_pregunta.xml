@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="5dp"
+    app:strokeColor="#D6D6D6"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Texto de la pregunta -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe la pregunta">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo de respuesta -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Respuesta correcta">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editRespuesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón eliminar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEliminar"
+            android:text="🗑️ Eliminar"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="#D32F2F"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
